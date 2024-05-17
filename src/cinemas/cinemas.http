@@ -1,0 +1,103 @@
+### Create Cinema / signup
+POST http://localhost:3000/cinemas/signup
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "cinemaName": "test Cinema",
+    "password": "1234",
+    "description": "New Cinema has arrived.",
+    "imagePath": ""
+}
+
+### Sign in a cinema
+POST http://localhost:3000/cinemas/signin
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "1234"
+}
+
+### Get the currently signed in Cinema
+GET http://localhost:3000/cinemas/current
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJjaW5lbWFOYW1lIjoidGVzdCBDaW5lbWEiLCJlbWFpbCI6InRlc3QgQ2luZW1hIiwiaWF0IjoxNzE1OTMwMDEyLCJleHAiOjE3MTYwMTY0MTJ9.-kC75EQZ-pjvve5TRt_TTPdaaCzBhQb8ECwHe2v2mJI
+
+### Get cinema info
+GET http://localhost:3000/cinemas/getpath
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJjaW5lbWFOYW1lIjoidGVzdCBDaW5lbWEiLCJlbWFpbCI6InRlc3QgQ2luZW1hIiwiaWF0IjoxNzE1OTMwMDEyLCJleHAiOjE3MTYwMTY0MTJ9.-kC75EQZ-pjvve5TRt_TTPdaaCzBhQb8ECwHe2v2mJI
+
+
+
+
+### Delete the currently logedin user
+DELETE http://localhost:3000/cinemas/delaccount
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsImNpbmVtYU5hbWUiOiIxQ2luZW1hIiwiZW1haWwiOiIxQ2luZW1hIiwiaWF0IjoxNzA0NzcwMDMxLCJleHAiOjE3MDQ4NTY0MzF9.CTFqdXt3CmmN1umbRjQL82ooJTd4eNVtGq2Uzw8dVEk
+
+### Update a user 
+PATCH http://localhost:3000/cinemas/edit
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjksImNpbmVtYU5hbWUiOiIyQ2luZW1hIiwiZW1haWwiOiIyQ2luZW1hIiwiaWF0IjoxNzA0NzcwMzc1LCJleHAiOjE3MDQ4NTY3NzV9.z9O_4YDQ1LDRmTFTY1SlQHvIpIa4-S-1x2xzRUIQyZE
+Content-Type: application/json
+
+{
+    "email": "abcd@abcd.com"
+}
+
+### Change user password
+PATCH http://localhost:3000/cinemas/changePass
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjksImNpbmVtYU5hbWUiOiIyQ2luZW1hIiwiZW1haWwiOiIyQ2luZW1hIiwiaWF0IjoxNzA0NzcwMzc1LCJleHAiOjE3MDQ4NTY3NzV9.z9O_4YDQ1LDRmTFTY1SlQHvIpIa4-S-1x2xzRUIQyZE
+Content-Type: application/json
+
+{
+    "currentPassword" : "1234",
+    "newPassword" : "abcd"
+}
+
+
+### Cinemas Add movie
+POST http://localhost:3000/cinemas/addMovie
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImNpbmVtYU5hbWUiOiJBbGVtIENpbmVtYSIsImVtYWlsIjoiQWxlbSBDaW5lbWEiLCJpYXQiOjE3MDQ5MTczOTksImV4cCI6MTcwNTAwMzc5OX0.VZpmLe3SwcraCkW5AHjcAp8eZsxpu5DU5_sEGQx2GYQ
+Content-Type: application/json
+
+{
+    "title" : "Spider man",
+    "genre": "la la",
+    "day": "1/9/2024",
+    "showTime": "3:00pm",
+    "CinemaId": 1
+
+}
+
+### Remove Movie From Cinema
+DELETE http://localhost:3000/cinemas/removeMovie/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJjaW5lbWFOYW1lIjoiVGVzdDYiLCJlbWFpbCI6IlRlc3Q2IiwiaWF0IjoxNzA0ODM0NDk0LCJleHAiOjE3MDQ5MjA4OTR9.tKbDNXMNu-AFueJlc_hduL9z-5UXhB4raCTMp7Y1tQg
+
+
+### Update Movie posted by cinemas
+PATCH  http://localhost:3000/cinemas/updateMovie/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJjaW5lbWFOYW1lIjoiVGVzdDYiLCJlbWFpbCI6IlRlc3Q2IiwiaWF0IjoxNzA0ODM0NDk0LCJleHAiOjE3MDQ5MjA4OTR9.tKbDNXMNu-AFueJlc_hduL9z-5UXhB4raCTMp7Y1tQg
+Content-Type: application/json
+
+{
+    "title": "la la land",
+    "day": "1/10/2024"
+}
+
+### Get all the movies posted by the cinema
+GET http://localhost:3000/cinemas/movies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImNpbmVtYU5hbWUiOiJ5IiwiZW1haWwiOiJ5IiwiaWF0IjoxNzA1MDY3MTQ0LCJleHAiOjE3MDUxNTM1NDR9.Wqnfc0ETtdmDcZLXEj11nz33-sFJStDRiDmdmr3qR7M
+
+
+### Get all the cinemas
+GET http://localhost:3000/cinemas/findCinemas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImNpbmVtYU5hbWUiOiJ5IiwiZW1haWwiOiJ5IiwiaWF0IjoxNzA1MDY3MTQ0LCJleHAiOjE3MDUxNTM1NDR9.Wqnfc0ETtdmDcZLXEj11nz33-sFJStDRiDmdmr3qR7M
+
+
+### Get all movies from all cinemas
+GET http://localhost:3000/cinemas/allMovies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImNpbmVtYU5hbWUiOiJ5IiwiZW1haWwiOiJ5IiwiaWF0IjoxNzA1MDY3MTQ0LCJleHAiOjE3MDUxNTM1NDR9.Wqnfc0ETtdmDcZLXEj11nz33-sFJStDRiDmdmr3qR7M
+
+
+### Get cinema by id
+GET http://localhost:3000/cinemas/view/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImNpbmVtYU5hbWUiOiJ5IiwiZW1haWwiOiJ5IiwiaWF0IjoxNzA1MDY3MTQ0LCJleHAiOjE3MDUxNTM1NDR9.Wqnfc0ETtdmDcZLXEj11nz33-sFJStDRiDmdmr3qR7M
