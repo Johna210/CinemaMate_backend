@@ -27,8 +27,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJjaW5lb
 GET http://localhost:3000/cinemas/getpath
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJjaW5lbWFOYW1lIjoidGVzdCBDaW5lbWEiLCJlbWFpbCI6InRlc3QgQ2luZW1hIiwiaWF0IjoxNzE1OTMwMDEyLCJleHAiOjE3MTYwMTY0MTJ9.-kC75EQZ-pjvve5TRt_TTPdaaCzBhQb8ECwHe2v2mJI
 
-
-
+### Check if cinema has a profile picture
+GET http://localhost:3000/cinemas/hasImage
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJjaW5lbWFOYW1lIjoidGVzdCBDaW5lbWEiLCJlbWFpbCI6InRlc3QgQ2luZW1hIiwiaWF0IjoxNzE1OTMwMDEyLCJleHAiOjE3MTYwMTY0MTJ9.-kC75EQZ-pjvve5TRt_TTPdaaCzBhQb8ECwHe2v2mJI
 
 ### Delete the currently logedin user
 DELETE http://localhost:3000/cinemas/delaccount

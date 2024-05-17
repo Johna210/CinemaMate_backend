@@ -162,7 +162,7 @@ export class CinemasController {
   @UseGuards(JwtAuthGuard)
   hasImage(@Request() req) {
     const cinema = req.user;
-    return this.cinemasService.findOne(cinema.sub);
+    return this.cinemasService.hasImage(cinema.sub);
   }
 
   @Get('/findCinemas')

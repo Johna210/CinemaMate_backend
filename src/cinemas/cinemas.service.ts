@@ -164,14 +164,17 @@ export class CinemasService {
 
     return this.repo.save(cinema);
   }
+
   // FindAll cinemas
   async findCinemas() {
     return this.repo.find();
   }
 
-  // addMovie() {}
-
-  // updateMovie() {}
-
-  // removeMovie() {}
+  async hasImage(id: number) {
+    const cinema = await this.findOne(id);
+    if (cinema.imagePath) {
+      return { hasImage: true, imagePath: cinema.imagePath };
+    }
+    return { hasImage: false, imagPath: '' };
+  }
 }

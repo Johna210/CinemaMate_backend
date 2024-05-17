@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
@@ -16,16 +17,36 @@ import { WatchList } from './watchlist/watchlist.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'admin',
-      database: 'cinema',
-      entities: [User, Cinema, Movies, WatchList],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        return {
+          type: 'mysql',
+          host: 'localhost',
+          port: Number(config.get<string>('PORT')),
+          username: config.get<string>('USER_NAME'),
+          password: config.get<string>('PASSWORD'),
+          database: config.get<string>('DB_NAME'),
+          entities: [User, Cinema, Movies, WatchList],
+          synchronize: true,
+        };
+      },
+    }),
+
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3306,
+    //   username: 'root',
+    //   password: 'admin',
+    //   database: 'cinema',
+    //   entities: [User, Cinema, Movies, WatchList],
+    //   synchronize: true,
+    // }),
     UsersModule,
     CinemasModule,
     MoviesModule,
