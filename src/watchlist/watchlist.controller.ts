@@ -1,7 +1,6 @@
 import {
   Controller,
   Post,
-  UseInterceptors,
   UseGuards,
   Get,
   Request,
@@ -9,7 +8,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { WatchlistService } from './watchlist.service';
-import { JwtAuthGuard } from '../auth/userauth/guards/jwt-userAuth.guard';
+import { UserJwtAuthGuard } from '../auth/userauth/guards/jwt-userAuth.guard';
 import { Serialize } from 'src/Interceptors/serialize.iterceptor';
 import { WatchListDto } from './dto/watchlist.dto';
 
@@ -18,14 +17,14 @@ export class WatchlistController {
   constructor(private watchlistService: WatchlistService) {}
 
   //http://localhost:3000/watchlist
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   @Get()
   WatchList(@Request() req) {
     return this.watchlistService.getUserWatchList(parseInt(req.user.sub));
   }
 
   // http:localhost:3000/watchlist/add/id
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   @Serialize(WatchListDto)
   @Post('/add/:id')
   addMovieToWatchlist(@Request() req, @Param('id') movieId: number) {
@@ -36,7 +35,7 @@ export class WatchlistController {
   }
 
   // http:localhost:3000/watchlist/delete/id
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   @Delete('/remove/:id')
   async removeFromWatchlist(@Request() req, @Param('id') movieId: number) {
     return await this.watchlistService.removeFromWatchList(

@@ -1,0 +1,17 @@
+### Book a movie
+POST http://localhost:3000/booking/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMxLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3MTYxNDg1NDQsImV4cCI6MTcxNjMyMTM0NH0.YYFxr24GA_MXgvpqT9vkzZa1F9Jz71PqdaCROMNWbbA
+Content-Type: application/json
+
+{   
+    "cinemaId": 13,
+    "movieId": 23
+}
+
+### Get bookings of a cinema
+GET http://localhost:3000/booking/cinema
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJjaW5lbWFOYW1lIjoiQ2luZW1hIiwiZW1haWwiOiJ0ZXN0MTAwQHRlc3QuY29tIiwiaWF0IjoxNzE2MTQ4NTk5LCJleHAiOjE3MTYzMjEzOTl9.kqILXc8GNLdNpWizRq6hXtJtbML1LMnxNgF2d1SnqPU
+
+### Get user bookings
+GET http://localhost:3000/booking/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMxLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3MTYxNDg1NDQsImV4cCI6MTcxNjMyMTM0NH0.YYFxr24GA_MXgvpqT9vkzZa1F9Jz71PqdaCROMNWbbA

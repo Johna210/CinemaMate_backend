@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { WatchList } from 'src/watchlist/watchlist.entity';
+import { Booking } from 'src/booking/booking.entity';
 
 @Entity()
 export class Movies {
@@ -41,4 +42,7 @@ export class Movies {
 
   @OneToMany(() => WatchList, (watchList) => watchList.movie)
   watchList: WatchList[];
+
+  @OneToMany(() => Booking, (booking) => booking.movie)
+  bookings: Booking[];
 }

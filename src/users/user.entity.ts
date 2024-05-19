@@ -12,6 +12,7 @@ import {
 
 import { Movies } from 'src/movies/movies.entity';
 import { WatchList } from 'src/watchlist/watchlist.entity';
+import { Booking } from 'src/booking/booking.entity';
 
 @Entity()
 export class User {
@@ -36,6 +37,9 @@ export class User {
 
   @OneToMany(() => WatchList, (watchlist) => watchlist.user)
   watchList: WatchList[];
+
+  @OneToMany(() => Booking, (booking) => booking.user)
+  bookings: Booking[];
 
   @AfterInsert()
   logInsert() {

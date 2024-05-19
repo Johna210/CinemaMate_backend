@@ -16,7 +16,7 @@ import { Serialize } from '../Interceptors/serialize.iterceptor';
 import { UserDto } from './dtos/user.dto';
 import { signinUserDto } from './dtos/signin-user.dto';
 import { UpdatePasswordDto } from './dtos/update-password.dto';
-import { JwtAuthGuard } from '../auth/userauth/guards/jwt-userAuth.guard';
+import { UserJwtAuthGuard } from '../auth/userauth/guards/jwt-userAuth.guard';
 import { WatchlistService } from '../watchlist/watchlist.service';
 import { MoviesService } from '../movies/movies.service';
 
@@ -26,7 +26,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get('/current')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   whoAmI(@Request() req) {
     return req.user;
   }
@@ -49,20 +49,20 @@ export class UsersController {
     return user;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   @Delete('/delaccount')
   removeUser(@Request() req) {
     return this.usersService.remove(req.user.sub);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   @Patch('/edit')
   updateUser(@Request() req, @Body() body: UpdateUserDto) {
     const user = req.user;
     return this.usersService.update(parseInt(user.sub), body);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   @Patch('/changePass')
   updatePassword(@Request() req, @Body() body: UpdatePasswordDto) {
     const user = req.user;

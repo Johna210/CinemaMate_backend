@@ -24,14 +24,14 @@ import { MovieDto } from './dto/movie.dto';
 export class MoviesController {
   constructor(private moviesService: MoviesService) {}
 
-  // http://localhost:3000/movies/cinema -> returns movies of a certain cinema
+  /// http://localhost:3000/movies/cinema -> returns movies of a certain cinema
   @Get('/cinema')
   @UseGuards(JwtAuthGuard)
   async getCinemaMovies(@Request() req) {
     return await this.moviesService.findCinemaMovies(parseInt(req.user.sub));
   }
 
-  // http://localhost:3000/movies/addmovie -> For adding a new Movie.
+  /// http://localhost:3000/movies/addmovie -> For adding a new Movie.
   @Post('/addMovie')
   @UseGuards(JwtAuthGuard)
   @Serialize(MovieDto)
@@ -64,14 +64,14 @@ export class MoviesController {
     return newMovie;
   }
 
-  // http://localhost:3000/movies/update/movieId -> To update an exisiting movies details
+  /// http://localhost:3000/movies/update/movieId -> To update an exisiting movies details
   @Patch('/update/:id')
   @UseGuards(JwtAuthGuard)
   updateMovie(@Param('id') id: string, @Body() body: UpdateMovieDto) {
     return this.moviesService.updateMovie(parseInt(id), body);
   }
 
-  // http://localhost:3000/movies/remove
+  /// http://localhost:3000/movies/remove
   @Delete('/remove/:id')
   @UseGuards(JwtAuthGuard)
   removeMovie(@Param('id') id: string) {
