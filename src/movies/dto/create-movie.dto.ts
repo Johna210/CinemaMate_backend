@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 export class CreateMovieDto {
   @IsString()
@@ -12,10 +13,7 @@ export class CreateMovieDto {
   @IsString()
   showTime: string;
 
-  @IsString()
-  @IsOptional()
-  imageUrl: string;
-
+  @Transform(({ value }) => Number(value))
   @IsNumber()
-  cinemaId: number;
+  numberOfSeats: number;
 }

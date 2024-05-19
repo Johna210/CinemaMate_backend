@@ -1,4 +1,5 @@
-import { IsString, IsOptional } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsString, IsOptional, IsNumber } from 'class-validator';
 export class UpdateMovieDto {
   @IsString()
   @IsOptional()
@@ -19,4 +20,9 @@ export class UpdateMovieDto {
   @IsString()
   @IsOptional()
   imageUrl: string;
+
+  @Transform(({ value }) => Number(value))
+  @IsNumber()
+  @IsOptional()
+  numberOfSeats: number;
 }

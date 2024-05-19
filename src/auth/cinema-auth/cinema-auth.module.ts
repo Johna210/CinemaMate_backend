@@ -10,7 +10,7 @@ import { ConfigService } from '@nestjs/config';
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '1d' },
+      signOptions: { expiresIn: '2 days' },
     }),
   ],
   providers: [CinemaAuthService, JwtAuthGuard, JwtStrategy, ConfigService],

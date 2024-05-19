@@ -1,2 +1,5 @@
+.env.development
+.env.test
+
 dist
 node_modules

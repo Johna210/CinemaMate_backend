@@ -5,7 +5,10 @@ import {
   AfterInsert,
   AfterUpdate,
   AfterRemove,
+  OneToMany,
 } from 'typeorm';
+
+import { Movies } from 'src/movies/movies.entity';
 
 @Entity()
 export class Cinema {
@@ -26,6 +29,9 @@ export class Cinema {
 
   @Column()
   imagePath: string;
+
+  @OneToMany(() => Movies, (movies) => movies.cinema)
+  movies: Movies[];
 
   @AfterInsert()
   logInsert() {

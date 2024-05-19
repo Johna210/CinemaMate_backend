@@ -2,11 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Movies } from './movies.entity';
 import { Repository } from 'typeorm';
+import { CinemasService } from 'src/cinemas/cinemas.service';
+import { UpdateMovieDto } from './dto/update-movie.dto';
 
 @Injectable()
 export class MoviesService {
   constructor(
     @InjectRepository(Movies) private moviesRepository: Repository<Movies>,
+    private cinemaService: CinemasService,
   ) {}
 
   //for Creating movies
@@ -16,6 +19,7 @@ export class MoviesService {
     day: string,
     showTime: string,
     imageUrl: string,
+    numberOfSeats: number,
     cinemaId: number,
   ) {
     const newmovie = this.moviesRepository.create({
@@ -24,15 +28,21 @@ export class MoviesService {
       day,
       showTime,
       imageUrl,
-      cinemaId,
+      numberOfSeats,
     });
+
+    const cinema = await this.cinemaService.findCinemaById(cinemaId);
+    newmovie.cinema = cinema;
 
     return this.moviesRepository.save(newmovie);
   }
 
   // find all the movies that have similar cinemaid
-  findByid(cinemaId: number) {
-    return this.moviesRepository.find({ where: { cinemaId } });
+  findCinemaMovies(cinemaId: number) {
+    return this.moviesRepository
+      .createQueryBuilder()
+      .select('*')
+      .where('cinema= :cinema', { cinemaId });
   }
 
   //returns all movies that have the same day
@@ -55,7 +65,7 @@ export class MoviesService {
   }
 
   // to update the movie by using its id
-  async updateMovie(id: number, attrs: Partial<Movies>) {
+  async updateMovie(id: number, attrs: Partial<UpdateMovieDto>) {
     const movie = await this.findMovieById(id);
 
     if (!movie) {
@@ -65,11 +75,6 @@ export class MoviesService {
     Object.assign(movie, attrs);
 
     return this.moviesRepository.save(movie);
-  }
-
-  // Get all movies from a particular cinema
-  async getCinemaMovies(id: number) {
-    return this.moviesRepository.find({ where: { cinemaId: id } });
   }
 
   //returns an Array of all moves
@@ -83,7 +88,7 @@ export class MoviesService {
       day: movie.day,
       showTime: movie.showTime,
       imageUrl: movie.imageUrl,
-      cinemaId: movie.cinemaId,
+      numberOfSeats: movie.numberOfSeats,
     }));
   }
 }

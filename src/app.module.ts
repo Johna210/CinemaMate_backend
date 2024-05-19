@@ -27,7 +27,7 @@ import { WatchList } from './watchlist/watchlist.entity';
         return {
           type: 'mysql',
           host: 'localhost',
-          port: Number(config.get<string>('PORT')),
+          port: 3306,
           username: config.get<string>('USER_NAME'),
           password: config.get<string>('PASSWORD'),
           database: config.get<string>('DB_NAME'),
@@ -37,16 +37,6 @@ import { WatchList } from './watchlist/watchlist.entity';
       },
     }),
 
-    // TypeOrmModule.forRoot({
-    //   type: 'mysql',
-    //   host: 'localhost',
-    //   port: 3306,
-    //   username: 'root',
-    //   password: 'admin',
-    //   database: 'cinema',
-    //   entities: [User, Cinema, Movies, WatchList],
-    //   synchronize: true,
-    // }),
     UsersModule,
     CinemasModule,
     MoviesModule,

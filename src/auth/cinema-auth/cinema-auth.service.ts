@@ -13,11 +13,11 @@ export class CinemaAuthService {
       {
         sub: cinema.id,
         cinemaName: cinema.cinemaName,
-        email: cinema.cinemaName,
+        email: cinema.email,
       },
       {
         secret: jwtConstants.secret,
-        expiresIn: '1d',
+        expiresIn: '2 days',
       },
     );
 

@@ -107,11 +107,11 @@ export class UsersController {
     return this.watchListService.getAllByUserId(parseInt(req.user.sub));
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('/cinema/:id')
-  getMoviesFromCinema(@Param('id') id: string) {
-    return this.MoviesService.getCinemaMovies(parseInt(id));
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Get('/cinema/:id')
+  // getMoviesFromCinema(@Param('id') id: string) {
+  //   return this.MoviesService.getCinemaMovies(parseInt(id));
+  // }
 
   // Add Booking controllers here
 }

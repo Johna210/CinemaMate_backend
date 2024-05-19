@@ -17,7 +17,7 @@ export class UserauthService {
       },
       {
         secret: jwtConstants.secret,
-        expiresIn: '1d',
+        expiresIn: '2 days',
       },
     );
 
