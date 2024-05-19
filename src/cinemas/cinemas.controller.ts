@@ -73,55 +73,6 @@ export class CinemasController {
     return cinema;
   }
 
-  // @Get('/movies')
-  // @UseGuards(JwtAuthGuard)
-  // async getCinemaMovies(@Request() req) {
-  //   return this.moviesService.getCinemaMovies(parseInt(req.user.sub));
-  // }
-
-  // @UseGuards(JwtAuthGuard)
-  // @Post('/addMovie')
-  // @UseInterceptors(
-  //   FileInterceptor('file', {
-  //     storage: diskStorage({
-  //       destination: 'src/images/MovieImages',
-  //       filename: (req, file, callback) => {
-  //         const filename = `${file.originalname}`;
-  //         callback(null, filename);
-  //         return filename;
-  //       },
-  //     }),
-  //   }),
-  // )
-  // async addMovie(
-  //   @Body() body: any,
-  //   @Request() req,
-  //   @UploadedFile() file: Express.Multer.File,
-  // ) {
-  //   const newMovie = await this.moviesService.createMovies(
-  //     body.title,
-  //     body.genre,
-  //     body.day,
-  //     body.showTime,
-  //     `src/images/movieImages/${file.filename}`,
-  //     parseInt(req.user.sub),
-  //   );
-  //   return newMovie;
-  // }
-
-  // @Delete('/removeMovie/:id')
-  // @UseGuards(JwtAuthGuard)
-  // removeMovie(@Param('id') id: string) {
-  //   return this.moviesService.removeMovie(parseInt(id));
-  // }
-
-  // @Patch('/updateMovie/:id')
-  // @UseGuards(JwtAuthGuard)
-  // updateMovie(@Param('id') id: string, @Body() body: UpdateMovieDto) {
-  //   console.log('updatedMovie');
-  //   return this.moviesService.updateMovie(parseInt(id), body);
-  // }
-
   @UseGuards(JwtAuthGuard)
   @Delete('/delaccount')
   removeCinema(@Request() req) {
@@ -167,12 +118,6 @@ export class CinemasController {
   getAllCinemas() {
     return this.cinemasService.findCinemas();
   }
-
-  // @Get('/allMovies')
-  // @UseGuards(JwtAuthGuard)
-  // getAllMovies() {
-  //   return this.moviesService.getAllMoveis();
-  // }
 
   @Get('view/:id')
   @UseGuards(JwtAuthGuard)

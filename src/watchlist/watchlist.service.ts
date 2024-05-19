@@ -2,52 +2,72 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { WatchList } from './watchlist.entity';
 import { Repository } from 'typeorm';
+import { UsersService } from 'src/users/users.service';
+import { MoviesService } from 'src/movies/movies.service';
 
 @Injectable()
 export class WatchlistService {
   constructor(
     @InjectRepository(WatchList)
     private watchListRepository: Repository<WatchList>,
+    private usersService: UsersService,
+    private moviesService: MoviesService,
   ) {}
 
-  // To create watchlist using the userId and movieId as parameter
-  async createWatchList(userId: number, movieId: number) {
-    const movies = await this.getMovieId(movieId);
-    if (movies.length === 0) {
-      const watchList = this.watchListRepository.create({ userId, movieId });
-      return this.watchListRepository.save(watchList);
-    }
-  }
-  // returns the userId from the database and this will be used to get watchlist by userID
-  getUserId(userId: number) {
-    return this.watchListRepository.find({ where: { userId } });
-  }
+  // * Add movie to watchlist method
+  async addToWatchList(userId: number, movieId: number) {
+    const user = await this.usersService.findOneById(userId);
+    const movie = await this.moviesService.findMovieById(movieId);
 
-  // returns the movieIs form the database and this will be used to remove watchlist by movesId
-  getMovieId(movieId: number) {
-    return this.watchListRepository.find({ where: { movieId } });
-  }
-
-  // get all the watchist by the userId
-  async getAllByUserId(userId: number) {
-    const watch = await this.getUserId(userId);
-
-    if (!watch) {
-      throw new Error('user id not fonund');
+    if (!user || !movie) {
+      throw new NotFoundException('User or Movie not found');
     }
 
-    return this.watchListRepository.find({ where: { userId } });
-  }
+    const existingEntry = await this.watchListRepository.findOne({
+      where: { user, movie },
+    });
 
-  // removes the watchlist using userId to find the current user and movieId to actual remove it from the watchlist
-  async removefromWatchList(userId: number, movieId: number) {
-    const watchUser = await this.getUserId(userId);
-    if (!watchUser) {
-      throw new NotFoundException('user not found');
+    if (existingEntry) {
+      throw new Error('Movie is already the user watchList');
     }
 
-    const watchMovie = await this.getMovieId(movieId);
+    const watchList = this.watchListRepository.create({ user, movie });
+    return this.watchListRepository.save(watchList);
+  }
 
-    return this.watchListRepository.remove(watchMovie);
+  // * remove movie from watchlist method
+  async removeFromWatchList(userId: number, movieId: number) {
+    const user = await this.usersService.findOneById(userId);
+    const movie = await this.moviesService.findMovieById(movieId);
+
+    if (!user || !movie) {
+      throw new NotFoundException('User or Movie not found');
+    }
+
+    const watchList = await this.watchListRepository.findOne({
+      where: { user, movie },
+    });
+
+    if (!watchList) {
+      throw new NotFoundException('Movie not found in user watchlist');
+    }
+
+    return this.watchListRepository.remove(watchList);
+  }
+
+  // * return Movies from watchlist method
+  async getUserWatchList(userId: number) {
+    const user = await this.usersService.findOneById(userId);
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const watchList = await this.watchListRepository.find({
+      where: { user },
+      relations: ['movie'],
+    });
+
+    return watchList.map((wl) => wl.movie);
   }
 }

@@ -7,11 +7,10 @@ import { User } from './user.entity';
 import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 import { UserauthService } from '../auth/userauth/userauth.service';
 import { JwtService } from '@nestjs/jwt';
-import { WatchlistModule } from '../watchlist/watchlist.module';
 import { MoviesModule } from '../movies/movies.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), WatchlistModule, MoviesModule],
+  imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
   providers: [
     UsersService,
@@ -19,5 +18,6 @@ import { MoviesModule } from '../movies/movies.module';
     JwtService,
     { provide: APP_INTERCEPTOR, useClass: CurrentUserInterceptor },
   ],
+  exports: [UsersService, TypeOrmModule],
 })
 export class UsersModule {}

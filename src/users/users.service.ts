@@ -13,7 +13,6 @@ export class UsersService {
   constructor(
     @InjectRepository(User) private repo: Repository<User>,
     private authService: UserauthService,
-    private moviesService: MoviesService,
   ) {}
 
   async create(
@@ -64,7 +63,14 @@ export class UsersService {
     return token;
   }
 
-  async findOne(id: number) {
+  async findOneWithMovies(userId: number) {
+    return await this.repo.findOne({
+      where: { id: userId },
+      relations: ['movies'],
+    });
+  }
+
+  async findOneById(id: number) {
     if (!id) {
       return null;
     }
@@ -98,7 +104,7 @@ export class UsersService {
 
   //   attrs short for attributes
   async update(id: number, attrs: Partial<User>) {
-    const user = await this.findOne(id);
+    const user = await this.findOneById(id);
 
     if (!user) {
       throw new NotFoundException('user not found');
@@ -110,7 +116,7 @@ export class UsersService {
   }
 
   async remove(id: number) {
-    const user = await this.findOne(id);
+    const user = await this.findOneById(id);
 
     if (!user) {
       throw new NotFoundException('user not found');
@@ -124,7 +130,7 @@ export class UsersService {
     currentPassword: string,
     newPassword: string,
   ) {
-    const user = await this.findOne(id);
+    const user = await this.findOneById(id);
 
     if (!user) {
       throw new NotFoundException('user not found');

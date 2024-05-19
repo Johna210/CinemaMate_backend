@@ -1,12 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { User } from 'src/users/user.entity';
+import { Movies } from 'src/movies/movies.entity';
 @Entity()
 export class WatchList {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  userId: number;
+  @ManyToOne(() => User, (user) => user.watchList)
+  user: User;
 
-  @Column()
-  movieId: number;
+  @ManyToOne(() => Movies, (movie) => movie.watchList)
+  movie: Movies;
 }

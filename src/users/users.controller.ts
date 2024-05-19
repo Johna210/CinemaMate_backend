@@ -23,11 +23,7 @@ import { MoviesService } from '../movies/movies.service';
 // @Serialize(UserDto)
 @Controller('users')
 export class UsersController {
-  constructor(
-    private usersService: UsersService,
-    private watchListService: WatchlistService,
-    private MoviesService: MoviesService,
-  ) {}
+  constructor(private usersService: UsersService) {}
 
   @Get('/current')
   @UseGuards(JwtAuthGuard)
@@ -77,41 +73,4 @@ export class UsersController {
       body.newPassword,
     );
   }
-
-  @UseGuards(JwtAuthGuard)
-  @Patch('/add/:id')
-  addToWatchlist(@Param('id') id: string, @Request() req) {
-    return this.watchListService.createWatchList(
-      parseInt(req.user.sub),
-      parseInt(id),
-    );
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Delete('/del/:id')
-  removeFromWatchList(@Param('id') id: string, @Request() req) {
-    return this.watchListService.removefromWatchList(
-      parseInt(req.user.sub),
-      parseInt(id),
-    );
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get('/movie/:id')
-  getMovieByID(@Param('id') id: string) {
-    return this.MoviesService.findMovieById(parseInt(id));
-  }
-  @UseGuards(JwtAuthGuard)
-  @Get('/watchlist')
-  getUserWatchList(@Request() req) {
-    return this.watchListService.getAllByUserId(parseInt(req.user.sub));
-  }
-
-  // @UseGuards(JwtAuthGuard)
-  // @Get('/cinema/:id')
-  // getMoviesFromCinema(@Param('id') id: string) {
-  //   return this.MoviesService.getCinemaMovies(parseInt(id));
-  // }
-
-  // Add Booking controllers here
 }

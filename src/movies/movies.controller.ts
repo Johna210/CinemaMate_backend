@@ -17,6 +17,8 @@ import { diskStorage } from 'multer';
 import { JwtAuthGuard } from '../auth/cinema-auth/guards/jwt-cinemaAuth.guard';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
+import { Serialize } from 'src/Interceptors/serialize.iterceptor';
+import { MovieDto } from './dto/movie.dto';
 
 @Controller('movies')
 export class MoviesController {
@@ -32,6 +34,7 @@ export class MoviesController {
   // http://localhost:3000/movies/addmovie -> For adding a new Movie.
   @Post('/addMovie')
   @UseGuards(JwtAuthGuard)
+  @Serialize(MovieDto)
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
