@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Movies } from './movies.entity';
 import { Repository } from 'typeorm';
@@ -37,12 +37,26 @@ export class MoviesService {
     return this.moviesRepository.save(newmovie);
   }
 
-  // find all the movies that have similar cinemaid
-  findCinemaMovies(cinemaId: number) {
-    return this.moviesRepository
-      .createQueryBuilder()
-      .select('*')
-      .where('cinema= :cinema', { cinemaId });
+  // find all the movies that have similar cinema_id
+  async findCinemaMovies(cinemaId: number) {
+    const cinema = await this.cinemaService.findCinemaById(cinemaId);
+    const movies = await this.moviesRepository.find({ where: { cinema } });
+    return movies;
+  }
+
+  // Decrease the number of seats
+  async decreaseSeats(movieId: number) {
+    const movie = await this.moviesRepository.findOne({
+      where: { id: movieId },
+    });
+    if (!movie) {
+      throw new NotFoundException('Movie not found');
+    }
+
+    var currentNumberOfSeats = movie.numberOfSeats;
+    movie.numberOfSeats = currentNumberOfSeats - 1;
+
+    return this.moviesRepository.save(movie);
   }
 
   //returns all movies that have the same day
@@ -59,7 +73,7 @@ export class MoviesService {
   async removeMovie(id: number) {
     const movie = await this.findMovieById(id);
     if (!movie) {
-      throw new Error('user not found');
+      throw new Error('movie not found');
     }
     return this.moviesRepository.remove(movie);
   }

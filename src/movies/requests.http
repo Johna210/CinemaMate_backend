@@ -1,0 +1,10 @@
+### Get all movies of a cinema
+GET http://localhost:3000/movies/cinema
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJjaW5lbWFOYW1lIjoiQ2luZW1hIiwiZW1haWwiOiJ0ZXN0MTAwQHRlc3QuY29tIiwiaWF0IjoxNzE2MTE0MjI2LCJleHAiOjE3MTYyODcwMjZ9.J_YzZvVr8mp03OQ3s_FjKKuObPUyxBA0WNOfc52wG5w
+
+### book Movie
+PATCH http://localhost:3000/movies/book/19
+
+### remove Movie
+DELETE http://localhost:3000/movies/remove/16
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJjaW5lbWFOYW1lIjoiQ2luZW1hIiwiZW1haWwiOiJ0ZXN0MTAwQHRlc3QuY29tIiwiaWF0IjoxNzE2MTE0MjI2LCJleHAiOjE3MTYyODcwMjZ9.J_YzZvVr8mp03OQ3s_FjKKuObPUyxBA0WNOfc52wG5w

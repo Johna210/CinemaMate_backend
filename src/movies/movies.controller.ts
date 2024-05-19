@@ -8,6 +8,8 @@ import {
   UseGuards,
   Patch,
   Param,
+  Get,
+  Delete,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -18,7 +20,14 @@ import { UpdateMovieDto } from './dto/update-movie.dto';
 
 @Controller('movies')
 export class MoviesController {
-  constructor(private moviesService: MoviesService) {} // Add closing parenthesis here
+  constructor(private moviesService: MoviesService) {}
+
+  // http://localhost:3000/movies/cinema -> returns movies of a certain cinema
+  @Get('/cinema')
+  @UseGuards(JwtAuthGuard)
+  async getCinemaMovies(@Request() req) {
+    return await this.moviesService.findCinemaMovies(parseInt(req.user.sub));
+  }
 
   // http://localhost:3000/movies/addmovie -> For adding a new Movie.
   @Post('/addMovie')
@@ -38,7 +47,7 @@ export class MoviesController {
   async addMovie(
     @Body() body: CreateMovieDto,
     @Request() req,
-    @UploadedFile() file: Express.Multer.File, // Add type annotation here
+    @UploadedFile() file: Express.Multer.File,
   ) {
     const newMovie = await this.moviesService.createMovies(
       body.title,
@@ -57,5 +66,12 @@ export class MoviesController {
   @UseGuards(JwtAuthGuard)
   updateMovie(@Param('id') id: string, @Body() body: UpdateMovieDto) {
     return this.moviesService.updateMovie(parseInt(id), body);
+  }
+
+  // http://localhost:3000/movies/remove
+  @Delete('/remove/:id')
+  @UseGuards(JwtAuthGuard)
+  removeMovie(@Param('id') id: string) {
+    return this.moviesService.removeMovie(parseInt(id));
   }
 }
