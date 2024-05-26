@@ -15,8 +15,8 @@ POST http://localhost:3000/cinemas/signin
 Content-Type: application/json
 
 {
-    "email": "test100@test.com",
-    "password": "1234"
+    "email": "new@gmail.com",
+    "password": "123456"
 }
 
 

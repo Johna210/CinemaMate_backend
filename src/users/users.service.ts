@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -58,6 +59,10 @@ export class UsersService {
       throw new BadRequestException('Incorrect password');
     }
 
+    if (user.suspended) {
+      throw new UnauthorizedException('Account suspended');
+    }
+
     const token = this.authService.generateJwt(user);
 
     return token;
@@ -92,6 +97,10 @@ export class UsersService {
     });
 
     return users;
+  }
+
+  async findAllUsers() {
+    return await this.repo.find();
   }
 
   async findUsername(username: string) {

@@ -16,6 +16,8 @@ import { WatchlistModule } from './watchlist/watchlist.module';
 import { WatchList } from './watchlist/watchlist.entity';
 import { BookingModule } from './booking/booking.module';
 import { Booking } from './booking/booking.entity';
+import { AdminModule } from './admin/admin.module';
+import { Admin } from './admin/entities/admin.entity';
 
 @Module({
   imports: [
@@ -33,7 +35,7 @@ import { Booking } from './booking/booking.entity';
           username: config.get<string>('USER_NAME'),
           password: config.get<string>('PASSWORD'),
           database: config.get<string>('DB_NAME'),
-          entities: [User, Cinema, Movies, WatchList, Booking],
+          entities: [User, Cinema, Movies, WatchList, Booking, Admin],
           synchronize: true,
         };
       },
@@ -46,6 +48,7 @@ import { Booking } from './booking/booking.entity';
     CinemaAuthModule,
     WatchlistModule,
     BookingModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService, CinemaAuthService],

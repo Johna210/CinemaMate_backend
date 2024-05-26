@@ -19,9 +19,6 @@ import { UpdateCinemaDto } from './dtos/update-cinema.dto';
 import { UpdatePasswordDto } from '../users/dtos/update-password.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { MoviesService } from '../movies/movies.service';
-import { UpdateMovieDto } from '../movies/dto/update-movie.dto';
-import { jwtConstants } from 'src/auth/constants';
 
 @Controller('cinemas')
 export class CinemasController {

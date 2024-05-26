@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
   UploadedFile,
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
@@ -60,6 +61,10 @@ export class CinemasService {
 
     if (!match) {
       throw new BadRequestException('Incorrect Password');
+    }
+
+    if (cinema.suspended) {
+      throw new UnauthorizedException('Account suspended');
     }
 
     // token

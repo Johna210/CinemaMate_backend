@@ -41,6 +41,9 @@ export class User {
   @OneToMany(() => Booking, (booking) => booking.user)
   bookings: Booking[];
 
+  @Column({ default: false })
+  suspended: boolean;
+
   @AfterInsert()
   logInsert() {
     console.log('Inserted User with id', this.id);

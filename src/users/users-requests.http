@@ -3,10 +3,10 @@ POST http://localhost:3000/users/signup
 Content-Type: application/json
 
 {
-    "email" : "test@test.com",
-    "fullname": "test",
-    "username": "test",
-    "password": "test"
+    "email" : "test12@test.com",
+    "fullname": "test12",
+    "username": "test12",
+    "password": "test12"
 
 }
 
@@ -21,7 +21,7 @@ Content-Type: application/json
 
 ### Get the currently signed in user
 GET http://localhost:3000/users/current
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMxLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3MTYxMjgzNzcsImV4cCI6MTcxNjMwMTE3N30.xsscnwggfciNVZm_tz-5u7qIq5NY6gxjdSgkwpeka3I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMxLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE3MTY0MTg2NDIsImV4cCI6MTcxNjU5MTQ0Mn0.ze1Sg50k0AyLvD_0769pnQbRYMZFxooEOOR0lj0P3v0
 
 
 ### Find a particular user with a given id
