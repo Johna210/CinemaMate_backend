@@ -18,12 +18,22 @@ import { BookingModule } from './booking/booking.module';
 import { Booking } from './booking/booking.entity';
 import { AdminModule } from './admin/admin.module';
 import { Admin } from './admin/entities/admin.entity';
+import { ServeStaticModule } from '@nestjs/serve-static/dist/serve-static.module';
+import { join } from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'src/images/cinemaImages'),
+      serveRoot: '/src/images/cinemaImages',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'src/images/movieImages'),
+      serveRoot: '/src/images/movieImages',
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],

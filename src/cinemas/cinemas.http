@@ -15,7 +15,7 @@ POST http://localhost:3000/cinemas/signin
 Content-Type: application/json
 
 {
-    "email": "new@gmail.com",
+    "email": "test100@test.com",
     "password": "123456"
 }
 
@@ -48,12 +48,12 @@ Content-Type: application/json
 
 ### Change user password
 PATCH http://localhost:3000/cinemas/changePass
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjksImNpbmVtYU5hbWUiOiIyQ2luZW1hIiwiZW1haWwiOiIyQ2luZW1hIiwiaWF0IjoxNzA0NzcwMzc1LCJleHAiOjE3MDQ4NTY3NzV9.z9O_4YDQ1LDRmTFTY1SlQHvIpIa4-S-1x2xzRUIQyZE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJjaW5lbWFOYW1lIjoiQ2luZW1hIiwiZW1haWwiOiJ0ZXN0MTAwQHRlc3QuY29tIiwiaWF0IjoxNzE3MDk4NjQzLCJleHAiOjE3MTcyNzE0NDN9.YqAKNUzz8rDahPOcxButBjgWNjk3f1iYJh7YWEcpCBA
 Content-Type: application/json
 
 {
     "currentPassword" : "1234",
-    "newPassword" : "abcd"
+    "newPassword" : "123456"
 }
 
 
@@ -93,7 +93,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImNpbmVtY
 
 ### Get all the cinemas
 GET http://localhost:3000/cinemas/findCinemas
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImNpbmVtYU5hbWUiOiJ5IiwiZW1haWwiOiJ5IiwiaWF0IjoxNzA1MDY3MTQ0LCJleHAiOjE3MDUxNTM1NDR9.Wqnfc0ETtdmDcZLXEj11nz33-sFJStDRiDmdmr3qR7M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM4LCJ1c2VybmFtZSI6InRlc3QxMiIsImVtYWlsIjoidGVzdDEyQHRlc3QuY29tIiwiaWF0IjoxNzE3MDEzODg5LCJleHAiOjE3MTcxODY2ODl9.L-yEW1GoT0hTA6Hk4uWNVWb2U1z54TLHXD35_0pW2uA
 
 
 ### Get all movies from all cinemas

@@ -31,6 +31,13 @@ export class MoviesController {
     return await this.moviesService.findCinemaMovies(parseInt(req.user.sub));
   }
 
+  /// http://localhost:3000/movies/cinema/id -> returns movies of a certain cinema
+  @Get('/cinema/:id')
+  @UseGuards(JwtAuthGuard)
+  async getCinemaMoviesById(@Param('id') id: string) {
+    return await this.moviesService.findCinemaMovies(parseInt(id));
+  }
+
   /// http://localhost:3000/movies/addmovie -> For adding a new Movie.
   @Post('/addMovie')
   @UseGuards(JwtAuthGuard)
@@ -61,6 +68,7 @@ export class MoviesController {
       Number(body.numberOfSeats),
       parseInt(req.user.sub),
     );
+    console.log(newMovie);
     return newMovie;
   }
 

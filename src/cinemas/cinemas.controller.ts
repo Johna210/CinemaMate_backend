@@ -37,7 +37,7 @@ export class CinemasController {
       body.email,
       body.password,
       body.description,
-      body.imagePath,
+      '',
     );
 
     return cinema;

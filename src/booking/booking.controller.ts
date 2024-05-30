@@ -21,6 +21,7 @@ export class BookingController {
   }
 
   @Get('/cinema')
+  @UseGuards(UserJwtAuthGuard)
   @UseGuards(JwtAuthGuard)
   async getCinemaBookings() {
     return await this.bookingService.getBookedMoviesFromCinema(13);

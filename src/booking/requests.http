@@ -10,7 +10,7 @@ Content-Type: application/json
 
 ### Get bookings of a cinema
 GET http://localhost:3000/booking/cinema
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJjaW5lbWFOYW1lIjoiQ2luZW1hIiwiZW1haWwiOiJ0ZXN0MTAwQHRlc3QuY29tIiwiaWF0IjoxNzE2MTQ4NTk5LCJleHAiOjE3MTYzMjEzOTl9.kqILXc8GNLdNpWizRq6hXtJtbML1LMnxNgF2d1SnqPU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJjaW5lbWFOYW1lIjoiQ2luZW1hIiwiZW1haWwiOiJ0ZXN0MTAwQHRlc3QuY29tIiwiaWF0IjoxNzE3MDE0NjczLCJleHAiOjE3MTcxODc0NzN9.42HcxhwBiRxkQ9uahh26BZvFnq2erUzF9SHQwq2pPg8
 
 ### Get user bookings
 GET http://localhost:3000/booking/user
