@@ -28,8 +28,8 @@ import { join } from 'path';
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'src/images/cinemaImages'),
-      serveRoot: '/src/images/cinemaImages',
+      rootPath: join(__dirname, '..', 'src/images/cinemaProfiles'),
+      serveRoot: '/src/images/cinemaProfiles',
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'src/images/movieImages'),

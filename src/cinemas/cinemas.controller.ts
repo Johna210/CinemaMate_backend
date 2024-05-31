@@ -128,4 +128,13 @@ export class CinemasController {
     console.log(id);
     return this.cinemasService.findCinemaById(parseInt(id));
   }
+
+  @Patch('/changeName')
+  @UseGuards(JwtAuthGuard)
+  changeCinemaName(@Request() req, @Body() body: { cinemaName: string }) {
+    const cinema = req.user;
+
+    console.log(body);
+    return this.cinemasService.update(parseInt(cinema.sub), body);
+  }
 }

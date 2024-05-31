@@ -4,12 +4,15 @@ import { Movies } from './movies.entity';
 import { Repository } from 'typeorm';
 import { CinemasService } from 'src/cinemas/cinemas.service';
 import { UpdateMovieDto } from './dto/update-movie.dto';
+import { WatchList } from 'src/watchlist/watchlist.entity';
 
 @Injectable()
 export class MoviesService {
   constructor(
     @InjectRepository(Movies) private moviesRepository: Repository<Movies>,
     private cinemaService: CinemasService,
+    @InjectRepository(WatchList)
+    private watchListRepository: Repository<WatchList>,
   ) {}
 
   //for Creating movies
@@ -71,10 +74,19 @@ export class MoviesService {
 
   //to remove a movie by using its id
   async removeMovie(id: number) {
+    // return this.moviesRepository.remove(movie);
     const movie = await this.findMovieById(id);
     if (!movie) {
       throw new Error('movie not found');
     }
+    // Remove the movie from all watch lists
+    await this.watchListRepository
+      .createQueryBuilder()
+      .delete()
+      .from(WatchList)
+      .where('movieId = :id', { id })
+      .execute();
+
     return this.moviesRepository.remove(movie);
   }
 

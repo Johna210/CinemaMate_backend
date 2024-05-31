@@ -162,6 +162,24 @@ export class CinemasService {
     return this.repo.save(cinema);
   }
 
+  async changeCinemaName(id: number, cinemaName: string) {
+    const cinemas = await this.findCinemaName(cinemaName);
+
+    if (cinemas.length > 0) {
+      throw new BadRequestException('cinemaName already taken');
+    }
+
+    const cinema = await this.findOne(id);
+
+    if (!cinema) {
+      throw new NotFoundException('user not found');
+    }
+
+    cinema.cinemaName = cinemaName;
+
+    return this.repo.save(cinema);
+  }
+
   async AddImagePath(id: number, filename: string) {
     if (!id) {
       return 'No cinema Id provided';
