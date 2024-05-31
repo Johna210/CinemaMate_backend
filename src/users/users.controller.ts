@@ -17,8 +17,6 @@ import { UserDto } from './dtos/user.dto';
 import { signinUserDto } from './dtos/signin-user.dto';
 import { UpdatePasswordDto } from './dtos/update-password.dto';
 import { UserJwtAuthGuard } from '../auth/userauth/guards/jwt-userAuth.guard';
-import { WatchlistService } from '../watchlist/watchlist.service';
-import { MoviesService } from '../movies/movies.service';
 
 // @Serialize(UserDto)
 @Controller('users')

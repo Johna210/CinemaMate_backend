@@ -19,6 +19,7 @@ import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Serialize } from 'src/Interceptors/serialize.iterceptor';
 import { MovieDto } from './dto/movie.dto';
+import { UserJwtAuthGuard } from 'src/auth/userauth/guards/jwt-userAuth.guard';
 
 @Controller('movies')
 export class MoviesController {
@@ -33,7 +34,7 @@ export class MoviesController {
 
   /// http://localhost:3000/movies/cinema/id -> returns movies of a certain cinema
   @Get('/cinema/:id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   async getCinemaMoviesById(@Param('id') id: string) {
     return await this.moviesService.findCinemaMovies(parseInt(id));
   }

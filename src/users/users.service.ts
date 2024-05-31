@@ -115,6 +115,8 @@ export class UsersService {
   async update(id: number, attrs: Partial<User>) {
     const user = await this.findOneById(id);
 
+    console.log(user);
+
     if (!user) {
       throw new NotFoundException('user not found');
     }

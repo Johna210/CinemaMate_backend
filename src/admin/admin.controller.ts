@@ -63,7 +63,7 @@ export class AdminController {
 
   // Users
   @Get('/allusers')
-  async findAllUsers(@Param('id') id: string) {
+  async findAllUsers() {
     return await this.adminService.getAllUsers();
   }
 

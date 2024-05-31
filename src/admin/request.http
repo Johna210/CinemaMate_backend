@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "username": "admin2",
-  "password": "admin2"
+  "password": "admin12"
 }
 
 ## login as admin
@@ -16,32 +16,32 @@ Content-Type: application/json
   "password": "admin"
 }
 
-## get all cinemas
-GET http://localhost:3000/admin/allCinemas
+# ## get all cinemas
+# GET http://localhost:3000/admin/allCinemas
 
-## get all users
-GET http://localhost:3000/admin/allUsers
+# ## get all users
+# GET http://localhost:3000/admin/allUsers
 
-## get user by id
-GET http://localhost:3000/admin/user/31
+# ## get user by id
+# GET http://localhost:3000/admin/user/31
 
-## get user by id
-GET http://localhost:3000/admin/cinema/11
+# ## get user by id
+# GET http://localhost:3000/admin/cinema/11
 
-## delete a cinema
-DELETE http://localhost:3000/admin/cinema/12
+# ## delete a cinema
+# DELETE http://localhost:3000/admin/cinema/12
 
-## delete a user
-DELETE http://localhost:3000/admin/user/32
+# ## delete a user
+# DELETE http://localhost:3000/admin/user/32
 
-## Suspend a user
-PUT http://localhost:3000/admin/suspend/user/31
+# ## Suspend a user
+# PUT http://localhost:3000/admin/suspend/user/31
 
-## suspend a cinema
-PUT http://localhost:3000/admin/suspend/Cinema/11
+# ## suspend a cinema
+# PUT http://localhost:3000/admin/suspend/Cinema/11
 
-## activate a user
-PUT http://localhost:3000/admin/unsuspend/user/31
+# ## activate a user
+# PUT http://localhost:3000/admin/unsuspend/user/31
 
-## activate a cinema
-PUT http://localhost:3000/admin/unsuspend/Cinema/11
+# ## activate a cinema
+# PUT http://localhost:3000/admin/unsuspend/Cinema/11

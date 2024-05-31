@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { WatchList } from './watchlist.entity';
 import { Repository } from 'typeorm';
@@ -28,7 +32,7 @@ export class WatchlistService {
     });
 
     if (existingEntry) {
-      throw new Error('Movie is already the user watchList');
+      throw new BadRequestException('Movie is already the user watchList');
     }
 
     const watchList = this.watchListRepository.create({ user, movie });
@@ -67,7 +71,6 @@ export class WatchlistService {
       where: { user },
       relations: ['movie'],
     });
-
     return watchList.map((wl) => wl.movie);
   }
 }

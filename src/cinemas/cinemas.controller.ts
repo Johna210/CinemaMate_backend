@@ -19,6 +19,7 @@ import { UpdateCinemaDto } from './dtos/update-cinema.dto';
 import { UpdatePasswordDto } from '../users/dtos/update-password.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { UserJwtAuthGuard } from 'src/auth/userauth/guards/jwt-userAuth.guard';
 
 @Controller('cinemas')
 export class CinemasController {
@@ -111,7 +112,7 @@ export class CinemasController {
   }
 
   @Get('/findCinemas')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(UserJwtAuthGuard)
   getAllCinemas() {
     return this.cinemasService.findCinemas();
   }
