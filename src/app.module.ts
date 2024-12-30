@@ -39,12 +39,12 @@ import { join } from 'path';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
         return {
-          type: 'mysql',
+          type: 'postgres',
           host: 'localhost',
-          port: 3306,
-          username: config.get<string>('USER_NAME'),
-          password: config.get<string>('PASSWORD'),
-          database: config.get<string>('DB_NAME'),
+          port: 5432,
+          username: config.get<string>('POSTGRES_USER'),
+          password: config.get<string>('POSTGRES_PASSWORD'),
+          database: config.get<string>('POSTGRES_DB'),
           entities: [User, Cinema, Movies, WatchList, Booking, Admin],
           synchronize: true,
         };
